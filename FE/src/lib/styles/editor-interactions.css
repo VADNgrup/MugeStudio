@@ -1,0 +1,104 @@
+.audio-clip.faded-in {
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 28%);
+  mask-image: linear-gradient(90deg, transparent, #000 28%);
+}
+
+.audio-clip.faded-out {
+  -webkit-mask-image: linear-gradient(90deg, #000 72%, transparent);
+  mask-image: linear-gradient(90deg, #000 72%, transparent);
+}
+
+.audio-clip.faded-in.faded-out {
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 22%, #000 78%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 22%, #000 78%, transparent);
+}
+
+.clip-volume-control {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #89858f;
+  padding: 0 5px;
+}
+
+.clip-volume-control input {
+  width: 52px;
+  height: 3px;
+  appearance: none;
+  border-radius: 3px;
+  background: linear-gradient(to right, #8875dc var(--range-progress), #e8e6ea var(--range-progress));
+}
+
+.clip-volume-control input::-webkit-slider-thumb {
+  appearance: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #7a65d7;
+}
+
+.clip-actions button.effect-active {
+  color: #624cc5;
+  background: #f3f0ff;
+}
+
+.import-source-tabs {
+  display: flex;
+  gap: 5px;
+  border-bottom: 1px solid #eeecf0;
+  margin-bottom: 10px;
+}
+
+.import-source-tabs button {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 9px;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  color: #8d8993;
+  font-size: 10px;
+}
+
+.import-source-tabs button.active {
+  color: #624cc5;
+  border-bottom-color: #7157df;
+  font-weight: 600;
+}
+
+.project-import-list > button.selected {
+  background: #faf8ff;
+}
+
+.upload-file-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #7057d0;
+  font-size: 9px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.import-project-cta {
+  width: 100%;
+  height: 33px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  margin-top: 12px;
+  border: 1px solid #7157df;
+  border-radius: 5px;
+  background: #7157df;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+@media (max-width: 650px) {
+  .clip-volume-control {
+    display: none;
+  }
+}
