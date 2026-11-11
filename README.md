@@ -1,0 +1,2 @@
+# MugeStudio
+Music Generation Studio
