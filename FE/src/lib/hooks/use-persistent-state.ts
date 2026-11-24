@@ -2,7 +2,7 @@
 
 import { useEffect, useState, type Dispatch, type SetStateAction } from "react";
 
-export function usePersistentState<T>(key: string, initialValue: T): [T, Dispatch<SetStateAction<T>>] {
+export function usePersistentState<T>(key: string, initialValue: T): [T, Dispatch<SetStateAction<T>>, boolean] {
   const [value, setValue] = useState(initialValue);
   const [hydrated, setHydrated] = useState(false);
 
@@ -26,5 +26,5 @@ export function usePersistentState<T>(key: string, initialValue: T): [T, Dispatc
     }
   }, [hydrated, key, value]);
 
-  return [value, setValue];
+  return [value, setValue, hydrated];
 }

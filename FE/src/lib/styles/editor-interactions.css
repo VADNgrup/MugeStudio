@@ -13,6 +13,64 @@
   mask-image: linear-gradient(90deg, transparent, #000 22%, #000 78%, transparent);
 }
 
+.studio-status-line {
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  border-bottom: 1px solid #e8e6e9;
+}
+
+.playhead {
+  z-index: 6;
+  top: 0;
+  bottom: 0;
+  width: 12px;
+  background: transparent;
+  pointer-events: auto;
+  cursor: ew-resize;
+  touch-action: none;
+  transform: translateX(-5px);
+}
+
+.playhead::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 5px;
+  width: 1px;
+  background: #ef8179;
+  pointer-events: none;
+}
+
+.playhead::before {
+  left: 1px;
+  top: 0;
+  z-index: 1;
+  width: 9px;
+  height: 9px;
+  cursor: ew-resize;
+}
+
+.asset-row[draggable="true"] { cursor: grab; }
+.asset-row[draggable="true"]:active { cursor: grabbing; }
+.asset-panel:not(.collapsed) { overflow-y: auto; }
+.track-lane.drop-target { background-color: #f5f2ff; box-shadow: inset 0 0 0 2px #a394ea; }
+
+.selection-info code {
+  max-width: 150px;
+  overflow: hidden;
+  color: #a09ca5;
+  font: 8px var(--mono);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 650px) {
+  .selection-info code { display: none; }
+}
+
 .clip-volume-control {
   display: inline-flex;
   align-items: center;

@@ -30,7 +30,7 @@ export async function makeFolderArchive(folder: StorageItem, items: StorageItem[
   const descendants = getStorageDescendantIds(items, folder.id);
   const folders = new Map(items.filter((item) => descendants.has(item.id) && item.type === "folder").map((item) => [item.id, item]));
   const files = await Promise.all(items.filter((item) => descendants.has(item.id) && item.type === "file").map(async (item) => {
-    const filename = item.content?.startsWith("data:") ? item.name : item.name.replace(/\.[^.]+$/, ".wav");
+    const filename = item.audioUrl || item.content?.startsWith("data:") ? item.name : item.name.replace(/\.[^.]+$/, ".wav");
     const segments = [filename];
     let parentId = item.parentId;
     while (parentId && parentId !== folder.id) {
@@ -45,6 +45,11 @@ export async function makeFolderArchive(folder: StorageItem, items: StorageItem[
 }
 
 export async function getItemBytes(item: StorageItem): Promise<Uint8Array> {
+  if (item.audioUrl) {
+    const response = await fetch(item.audioUrl);
+    if (!response.ok) throw new Error(`Unable to load ${item.audioUrl}: ${response.status}`);
+    return new Uint8Array(await response.arrayBuffer());
+  }
   if (item.content?.startsWith("data:")) {
     const response = await fetch(item.content);
     return new Uint8Array(await response.arrayBuffer());

@@ -1,5 +1,30 @@
 export type SoundColor = "blue" | "green" | "purple" | "amber" | "pink";
 
+export type GenerationSettings = {
+  prompt: string;
+  instrument: string;
+  mood: string;
+  bpm: number;
+  key: string;
+  durationSeconds: number;
+  effects: string[];
+  negativePrompt: string;
+};
+
+export type GenerationStatus = "queued" | "running" | "succeeded" | "failed";
+
+export type ClipGeneration = {
+  status: GenerationStatus;
+  serviceId: string;
+  settings: GenerationSettings;
+  fileName: string;
+  metadataFileName: string;
+  projectId?: string;
+  audioUrl?: string;
+  createdAt: string;
+  isDemo: boolean;
+};
+
 export type Clip = {
   id: string;
   name: string;
@@ -11,6 +36,8 @@ export type Clip = {
   volume?: number;
   fadeIn?: boolean;
   fadeOut?: boolean;
+  audioUrl?: string;
+  generation?: ClipGeneration;
 };
 
 export type Track = {
@@ -46,6 +73,7 @@ export type StoredSound = {
   duration: string;
   size: string;
   color: SoundColor;
+  audioUrl?: string;
 };
 
 export type StorageItem = {
@@ -58,6 +86,9 @@ export type StorageItem = {
   updatedAt: string;
   color: SoundColor;
   content?: string;
+  audioUrl?: string;
+  projectId?: string;
+  nameLocked?: boolean;
 };
 
 export type ProjectLog = {
@@ -68,4 +99,16 @@ export type ProjectLog = {
   user: string;
   createdAt: string;
   type: "create" | "edit" | "generate" | "import" | "export";
+};
+
+export type AIService = {
+  id: string;
+  name: string;
+  deployment: "local" | "cloud";
+  provider: "ace-step" | "gemini-lyria" | "custom";
+  baseUrl: string;
+  model: string;
+  enabled: boolean;
+  isDefault: boolean;
+  connection: "unknown" | "online" | "offline";
 };
